@@ -111,16 +111,44 @@ The fns are defined in document order and are metadata-annotated with related se
                 ))
 
 ;; 3. CAS Entities
+(defn- gen-uuid [] (str (java.util.UUID/randomUUID)))
+(defn- gen-ticket [prefix] (str prefix "-" (gen-uuid)))
+
+; FIXME: implement me
+(defn valid-token? [& args] true)
+
 ;; 3.1. service ticket
 ;; 3.1.1. service ticket properties
+(defn gen-service-ticket [] (gen-ticket "ST"))
+
 ;; 3.2. proxy ticket
 ;; 3.2.1. proxy ticket properties
+(defn gen-proxy-ticket [] (gen-ticket "PT"))
+
 ;; 3.3. proxy-granting ticket
 ;; 3.3.1. proxy-granting ticket properties
+(defn gen-proxy-granting-ticket [] (gen-ticket "PGT"))
+
 ;; 3.4. proxy-granting ticket IOU
 ;; 3.4.1. proxy-granting ticket IOU properties
+(defn gen-proxy-granting-ticket-IOU [] (gen-ticket "PGTIOU"))
+
 ;; 3.5. login ticket
 ;; 3.5.1. login ticket properties
+(defn gen-login-ticket [] (gen-ticket "LT"))
+
 ;; 3.6. ticket-granting cookie
 ;; 3.6.1. ticket-granting cookie properties
+(defn gen-ticket-granting-cookie [] (gen-ticket "TGC"))
+
 ;; 3.7. ticket and ticket-granting cookie character set
+;;
+;;   In addition to the above requirements, all CAS tickets and the value of the ticket-granting cookie
+;;   MUST contain only characters from the set {A-Z, a-z, 0-9, and the hyphen character '-'}.
+;;
+(let [orig-gen-ticket gen-ticket
+      bad-chars #"[^A-Za-z0-9-]+"]
+
+  ; wrap original implementation in case it changes to have unsafe chars
+  (defn- gen-ticket [prefix]
+    (clojure.string/replace (orig-gen-ticket prefix) bad-chars "")))
