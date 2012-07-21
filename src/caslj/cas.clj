@@ -681,7 +681,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;; 3. CAS Entities
 ;;
 (defn- gen-uuid [] (str (java.util.UUID/randomUUID)))
-(defn- gen-ticket [prefix] (str prefix "-" (gen-uuid)))
+(defn- gen-ticket [prefix] (str prefix (gen-uuid)))
 
 ; FIXME: implement me
 (defn valid-token? [& args] true)
@@ -717,7 +717,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   in length. It is RECOMMENDED that services support service tickets of up
 ;;   to 256 characters in length.
 ;;
-(defn gen-service-ticket [] (gen-ticket "ST"))
+(defn gen-service-ticket [] (gen-ticket "ST-"))
 
 ;; 3.2. proxy ticket
 ;;
@@ -751,7 +751,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   characters in length. It is RECOMMENDED that back-end services support
 ;;   proxy tickets of up to 256 characters in length.
 ;;
-(defn gen-proxy-ticket [] (gen-ticket "PT"))
+(defn gen-proxy-ticket [] (gen-ticket "PT-"))
 
 ;; 3.3. proxy-granting ticket
 ;;
@@ -775,7 +775,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   characters in length. It is RECOMMENDED that services support
 ;;   proxy-granting tickets of up to 256 characters in length.
 ;;
-(defn gen-proxy-granting-ticket [] (gen-ticket "PGT"))
+(defn gen-proxy-granting-ticket [] (gen-ticket "PGT-"))
 
 ;; 3.4. proxy-granting ticket IOU
 ;;
@@ -799,7 +799,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   length. It is RECOMMENDED that services support PGTIOUs of up to 256
 ;;   characters in length.
 ;;
-(defn gen-proxy-granting-ticket-IOU [] (gen-ticket "PGTIOU"))
+(defn gen-proxy-granting-ticket-IOU [] (gen-ticket "PGTIOU-"))
 
 ;; 3.5. login ticket
 ;;
@@ -817,7 +817,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   that login ticket to fail.
 ;;   * Login tickets SHOULD begin with the characters, "LT-".
 ;;
-(defn gen-login-ticket [] (gen-ticket "LT"))
+(defn gen-login-ticket [] (gen-ticket "LT-"))
 
 ;; 3.6. ticket-granting cookie
 ;;
@@ -841,7 +841,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   * The value of ticket-granting cookies SHOULD begin with the characters,
 ;;   "TGC-".
 ;;
-(defn gen-ticket-granting-cookie [] (gen-ticket "TGC"))
+(defn gen-ticket-granting-cookie [] (gen-ticket "TGC-"))
 
 ;; 3.7. ticket and ticket-granting cookie character set
 ;;
