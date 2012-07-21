@@ -27,7 +27,7 @@ The fns are defined in document order and are metadata-annotated with related se
                 ;; 2.1.3. response for username/password authentication
                 ;; 2.1.4. response for trust authentication
                 ;; 2.1.5. response for single sign-on authentication
-                "")
+                "not implemented")
 
            ;; 2.2. /login as credential acceptor
            (POST "/login"
@@ -44,7 +44,7 @@ The fns are defined in document order and are metadata-annotated with related se
                   ]
 
                  ;; 2.2.4. response
-                 "")
+                 "not implemented")
 
            ;; 2.3. /logout
            (ANY "/logout"
@@ -58,34 +58,57 @@ The fns are defined in document order and are metadata-annotated with related se
 
            ;; 2.4. /validate [CAS 1.0]
            (ANY "/validate"
+
                 ;; 2.4.1. parameters
+                [service ticket renew]
+
                 ;; 2.4.2. response
+                (if (valid? ticket) ; FIXME: pseudo-code
+                  (str "yes" \newline "username") ; TODO: replace with actual username
+                  (str "no" \newline \newline))
+
                 ;; 2.4.3. URL examples of /validate
-                "")
+                )
+
 
            ;; 2.5. /serviceValidate [CAS 2.0]
            (ANY "/serviceValidate"
+
                 ;; 2.5.1. parameters
+                [service ticket pgtUrl renew]
+
                 ;; 2.5.2. response
+                "not implemented"
+
                 ;; 2.5.3. error codes
                 ;; 2.5.4. proxy callback
                 ;; 2.5.5. URL examples of /serviceValidate
-                "")
+                )
 
            ;; 2.6. /proxyValidate [CAS 2.0]
            (ANY "/proxyValidate"
+
                 ;; 2.6.1. parameters
+                [service ticket pgtUrl renew]
+
                 ;; 2.6.2. response
+                "not implemented"
+
                 ;; 2.6.3 URL examples of /proxyValidate
-                "")
+                )
 
            ;; 2.7. /proxy [CAS 2.0]
            (ANY "/proxy"
+
                 ;; 2.7.1. parameters
+                [pgt targetService]
+
                 ;; 2.7.2. response
+                "not implemented"
+
                 ;; 2.7.3. error codes
                 ;; 2.7.4. URL example of /proxy
-                ""))
+                ))
 
 ;; 3. CAS Entities
 ;; 3.1. service ticket
