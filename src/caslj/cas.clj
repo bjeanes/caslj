@@ -5,6 +5,8 @@ The fns are defined in document order and are metadata-annotated with related se
   (:use compojure.core)
   (:require [compojure.route :as route]))
 
+(declare valid-ticket?)
+
 ;; CAS Protocol
 ;;
 ;;   Original Text: http://www.jasig.org/cas/protocol/
