@@ -676,7 +676,7 @@ The fns are defined in document order and are metadata-annotated with related se
                 ;;
                 ;;     https://server/cas/proxy?targetService=http%3A%2F%2Fwww.service.com&pgt=PGT-490649-W81Y9Sa2vTM7hda7xNTkezTbVge4CUsybAr
                 ;;
-                )
+                ))
 
 ;; 3. CAS Entities
 ;;
