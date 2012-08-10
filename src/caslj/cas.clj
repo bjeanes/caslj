@@ -3,7 +3,7 @@
 The fns are defined in document order and are metadata-annotated with related section(s)."
 
   (:use compojure.core)
-  (:require [compojure.route :as route]))
+  (:require [trammel.provide :as provide]))
 
 (declare valid-ticket?)
 
@@ -858,10 +858,8 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   the ticket-granting cookie MUST contain only characters from the set {A-Z,
 ;;   a-z, 0-9, and the hyphen character '-'}.
 ;;
-(let [orig-gen-ticket gen-ticket
-                      bad-chars #"[^A-Za-z0-9-]+"]
-
-  ; wrap original implementation in case it changes to have unsafe chars
-  (defn- gen-ticket [prefix]
-    (clojure.string/replace (orig-gen-ticket prefix) bad-chars "")))
+(let [bad-chars #"[^A-Za-z0-9-]+"]
+  (provide/contracts
+    [gen-ticket "Valid values must contain only alphanumeric characters and hyphens."
+     [prefix] [string? => (not (re-seq bad-chars %))]]))
 
