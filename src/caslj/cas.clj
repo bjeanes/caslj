@@ -29,7 +29,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;;   access on behalf of a client. This can also be referred to as the "target
 ;;   service."
 ;;   * <LF> is a bare line feed (ASCII value 0x0a).
-(def- newline (char 0x0a))
+(def ^:private newline (char 0x0a))
 
 ;; 2. CAS URIs
 ;;
