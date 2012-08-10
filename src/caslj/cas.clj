@@ -3,7 +3,8 @@
 The fns are defined in document order and are metadata-annotated with related section(s)."
 
   (:use compojure.core)
-  (:require [trammel.provide :as provide]))
+  (:require [trammel.provide :as provide]
+            [ring.middleware.cookies :as ring]))
 
 (declare valid-ticket?)
 
@@ -37,7 +38,7 @@ The fns are defined in document order and are metadata-annotated with related se
 ;; accessible through specific URIs. This section will discuss each of the
 ;; URIs.
 ;;
-(defn cas-server []
+(defn handler* []
   (routes
 
     ;; 2.1. /login as credential requester
@@ -684,8 +685,7 @@ The fns are defined in document order and are metadata-annotated with related se
               ;;
               )))
 
-(let [original-cas-server cas-server]
-  (def cas-server (ring.middleware.cookies/wrap-cookies original-cas-server)))
+(defn handler [& args] (ring/wrap-cookies (apply handler* args)))
 
 ;; 3. CAS Entities
 ;;
